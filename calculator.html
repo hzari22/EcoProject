@@ -1,0 +1,74 @@
+<!-- calculator.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CO₂ Rechner</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <h1>EcoTrack</h1>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="calculator.html">Rechner</a></li>
+        <li><a href="tips.html">Tipps</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="calculator-section">
+
+      <h2>CO₂ Rechner</h2>
+
+      <div class="calculator-box">
+
+        <label>Kilometer</label>
+
+        <input
+          type="number"
+          id="distance"
+          placeholder="z.B. 50"
+        >
+
+        <label>Fahrzeugtyp</label>
+
+        <select id="vehicle">
+          <option value="car">Auto</option>
+          <option value="motorcycle">Motorrad</option>
+        </select>
+
+        <button id="calculateBtn">
+          CO₂ berechnen
+        </button>
+
+        <div class="result-box">
+          <h3>Ergebnis</h3>
+
+          <p id="result">
+            Noch keine Berechnung.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 EcoTrack</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
