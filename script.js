@@ -1,125 +1,90 @@
-// js/app.js
+const btn = document.getElementById("calculateBtn");
 
-const calculateBtn = document.getElementById("calculateBtn");
+btn.addEventListener("click", async () => {
 
-calculateBtn.addEventListener("click", async () => {
+    const type = document.getElementById("type").value;
+    const distance = document.getElementById("distance").value;
+    const result = document.getElementById("result");
 
-    // Eingaben holen
-    const distance =
-        document.getElementById("distance").value;
-
-    const vehicle =
-        document.getElementById("vehicle").value;
-
-    const result =
-        document.getElementById("result");
-
-    // Prüfen ob etwas eingegeben wurde
-    if(distance === "" || distance <= 0){
-        result.innerText =
-            "Bitte gib gültige Kilometer ein.";
+    if (!distance || distance <= 0) {
+        result.innerText = "Bitte gültige Kilometer eingeben.";
         return;
     }
 
-    // Ladeanzeige
     result.innerText = "Berechnung läuft...";
 
-    // Fahrzeug-ID
-    // Diese IDs kommen von Carbon Interface
-    let vehicleModelId = "";
+    // Emission Factors (Climatiq Standard IDs)
+    let activityId = "";
 
-    if(vehicle === "car"){
-        vehicleModelId =
-            "7268a9b7-17e8-4c8d-acca-57059252afe9";
+    switch(type){
+        case "car":
+            activityId = "passenger_vehicle-vehicle_type_car-fuel_source_petrol-engine_size_na";
+            break;
+
+        case "train":
+            activityId = "passenger_train-route_type_long_haul";
+            break;
+
+        case "bus":
+            activityId = "passenger_vehicle-vehicle_type_bus-fuel_source_diesel";
+            break;
+
+        case "flight":
+            activityId = "air_travel-route_type_domestic";
+            break;
     }
 
-    if(vehicle === "motorcycle"){
-        vehicleModelId =
-            "a9382c56-7a7b-4d2f-b6db-f328f2f0f6f4";
-    }
+    try {
 
-    try{
-
-        // API Anfrage
         const response = await fetch(
-            "https://www.carboninterface.com/api/v1/estimates",
+            "https://api.climatiq.io/data/v1/estimate",
             {
-
                 method: "POST",
-
                 headers: {
-
-                    "Authorization":
-                        "Bearer a2M2CeN0a5ALjfscZgXwZA",
-
-                    "Content-Type":
-                        "application/json"
+                    "Authorization": "Bearer DEIN_CLIMATIQ_KEY",
+                    "Content-Type": "application/json"
                 },
 
                 body: JSON.stringify({
-
-                    type: "vehicle",
-
-                    distance_unit: "km",
-
-                    distance_value:
-                        Number(distance),
-
-                    vehicle_model_id:
-                        vehicleModelId
+                    emission_factor: {
+                        activity_id: activityId,
+                        data_version: "^1"
+                    },
+                    parameters: {
+                        distance: Number(distance),
+                        distance_unit: "km"
+                    }
                 })
             }
         );
 
-        // Antwort umwandeln
         const data = await response.json();
 
         console.log(data);
 
-        // CO2 Wert holen
-        const carbon =
-            data.data.attributes.carbon_kg;
+        const co2 = data.co2e;
 
-        // Ausgabe
-        result.innerHTML =
-            `
-            🌍 Dein Ausstoß beträgt:
-            <br><br>
-            <strong>${carbon} kg CO₂</strong>
-            `;
+        result.innerHTML = `
+            🌍 CO₂ Ausstoß:<br><br>
+            <strong>${co2.toFixed(2)} kg CO₂</strong>
+        `;
 
-        // localStorage speichern
-        localStorage.setItem(
-            "lastResult",
-            carbon
-        );
+        localStorage.setItem("lastCO2", co2);
 
-    }catch(error){
-
-        console.error(error);
-
-        result.innerText =
-            "Fehler bei der API Anfrage.";
-
+    } catch (err) {
+        console.error(err);
+        result.innerText = "Fehler bei der API Anfrage.";
     }
-
 });
 
-// Letztes Ergebnis laden
+// Letzter Wert
 window.addEventListener("load", () => {
 
-    const lastResult =
-        localStorage.getItem("lastResult");
+    const last = localStorage.getItem("lastCO2");
 
-    if(lastResult){
-
-        document.getElementById("result")
-            .innerHTML =
-            `
-            Letzte Berechnung:
-            <br><br>
-            <strong>${lastResult} kg CO₂</strong>
-            `;
+    if(last){
+        document.getElementById("result").innerHTML =
+        `Letztes Ergebnis:<br><strong>${last} kg CO₂</strong>`;
     }
 
 });
