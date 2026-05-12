@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Rechner | EcoTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="navbar">
+    <a class="brand" href="index.html" aria-label="EcoTrack Startseite">EcoTrack</a>
+    <nav>
+        <a href="index.html">Start</a>
+        <a href="calculator.html" aria-current="page">Rechner</a>
+        <a href="tips.html">Tipps</a>
+        <a href="support.html">Unterst&uuml;tzen</a>
+        <a href="documentation.html">Doku</a>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <section class="intro">
+        <p class="section-label">CO2 Rechner</p>
+        <h1>Berechne die Emissionen deiner Strecke.</h1>
+        <p>W&auml;hle ein Verkehrsmittel, gib die Entfernung ein und vergleiche sofort die Klimawirkung.</p>
+    </section>
+
+    <section class="calculator-layout">
+        <form class="calculator-card" id="calculatorForm">
+            <label for="type">Transportmittel</label>
+            <select id="type" name="type">
+                <option value="car">Auto (Benzin/Diesel)</option>
+                <option value="electricCar">Elektroauto</option>
+                <option value="train">Zug (Premium)</option>
+                <option value="bus">Linienbus</option>
+                <option value="coach">Reisebus</option>
+                <option value="tram">Stra&szlig;enbahn / U-Bahn</option>
+                <option value="flight">Flugzeug (Premium)</option>
+                <option value="bike">Fahrrad</option>
+                <option value="walk">Zu Fu&szlig;</option>
+            </select>
+
+            <label for="distance">Kilometer</label>
+            <input type="number" id="distance" name="distance" placeholder="z.B. 50" min="0.1" step="0.1">
+
+            <button class="button" id="calculateBtn" type="submit">CO2 berechnen</button>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+            <span class="result-label">Ergebnis</span>
+            <div class="result" id="result">Gib eine Strecke ein, um dein Ergebnis zu sehen.</div>
+            <div class="result-meta" id="resultMeta">Die Werte sind Durchschnittswerte pro Personenkilometer.</div>
+            <a class="text-link" id="premiumLink" href="support.html">Premium durch Unterst&uuml;tzung freischalten</a>
+        </aside>
+    </section>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>

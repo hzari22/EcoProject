@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentation | EcoTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="navbar">
+    <a class="brand" href="index.html" aria-label="EcoTrack Startseite">EcoTrack</a>
+    <nav>
+        <a href="index.html">Start</a>
+        <a href="calculator.html">Rechner</a>
+        <a href="tips.html">Tipps</a>
+        <a href="support.html">Unterst&uuml;tzen</a>
+        <a href="documentation.html" aria-current="page">Doku</a>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <section class="intro">
+        <p class="section-label">Dokumentation</p>
+        <h1>Erkl&auml;rung der wichtigsten Quelltext-Passagen.</h1>
+        <p>Diese Seite zeigt, wo die geforderten Punkte im Projekt umgesetzt wurden.</p>
+    </section>
+
+    <section class="doc-grid">
+        <article class="doc-card">
+            <h2>1. Mindestens drei Fetch-Abfragen</h2>
+            <p>In <strong>js/app.js</strong> gibt es mehrere Funktionen mit <code>fetch()</code>: <code>fetchEmission()</code> fragt die Climatiq API f&uuml;r CO2-Werte ab. <code>fetchSupportLevels()</code> l&auml;dt eine Liste von Supporter-Leveln. <code>fetchPremiumMessage()</code> l&auml;dt eine Best&auml;tigungsnachricht nach der Spende.</p>
+        </article>
+
+        <article class="doc-card">
+            <h2>2. Liste ausgeben und Array durchlaufen</h2>
+            <p>Die Funktion <code>renderSupportLevels()</code> filtert ein Array und durchl&auml;uft es mit <code>forEach()</code>. F&uuml;r jedes Element wird eine Karte im HTML-Bereich <code>supportLevels</code> erzeugt.</p>
+        </article>
+
+        <article class="doc-card">
+            <h2>3. Filter mit Formularfeldern</h2>
+            <p>Auf <strong>support.html</strong> gibt es ein Suchfeld <code>levelSearch</code>. Bei jeder Eingabe wird die Supporter-Liste neu gefiltert, damit nur passende Level angezeigt werden.</p>
+        </article>
+
+        <article class="doc-card">
+            <h2>4. Local-Storage</h2>
+            <p>Nach dem Spendenformular speichert <code>saveSupporter()</code> Name, E-Mail, Betrag, Monate und den Premium-Status in <code>localStorage</code>. Der Rechner liest diesen Wert und schaltet Zug und Flug frei.</p>
+        </article>
+
+        <article class="doc-card">
+            <h2>5. Premium-Funktionen</h2>
+            <p>In <code>calculatorForm</code> wird vor der Berechnung gepr&uuml;ft, ob das gew&auml;hlte Verkehrsmittel Premium braucht. Ohne gespeicherte Unterst&uuml;tzung zeigt die Seite einen Hinweis und verweist auf das Formular.</p>
+        </article>
+    </section>
+</main>
+</body>
+</html>

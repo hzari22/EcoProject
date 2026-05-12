@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unterst&uuml;tzen | EcoTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header class="navbar">
+    <a class="brand" href="index.html" aria-label="EcoTrack Startseite">EcoTrack</a>
+    <nav>
+        <a href="index.html">Start</a>
+        <a href="calculator.html">Rechner</a>
+        <a href="tips.html">Tipps</a>
+        <a href="support.html" aria-current="page">Unterst&uuml;tzen</a>
+        <a href="documentation.html">Doku</a>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <section class="intro">
+        <p class="section-label">Premium freischalten</p>
+        <h1>Unterst&uuml;tze EcoTrack und erweitere den Rechner.</h1>
+        <p>Nach dem Absenden werden Zug- und Flugberechnungen auf diesem Ger&auml;t freigeschaltet.</p>
+    </section>
+
+    <section class="support-layout">
+        <form class="calculator-card" id="supportForm">
+            <label for="supportName">Name</label>
+            <input type="text" id="supportName" name="supportName" placeholder="Dein Name" required>
+
+            <label for="supportEmail">E-Mail</label>
+            <input type="email" id="supportEmail" name="supportEmail" placeholder="name@example.com" required>
+
+            <label for="donationAmount">Spendenbetrag pro Monat</label>
+            <select id="donationAmount" name="donationAmount">
+                <option value="3">3 Euro</option>
+                <option value="5">5 Euro</option>
+                <option value="10">10 Euro</option>
+                <option value="20">20 Euro</option>
+            </select>
+
+            <label for="donationMonths">Monatsanzahl</label>
+            <input type="number" id="donationMonths" name="donationMonths" min="1" max="24" value="1" required>
+
+            <button class="button" type="submit">Jetzt unterst&uuml;tzen</button>
+            <button class="button button-secondary" id="resetSupport" type="button">Premium zur&uuml;cksetzen</button>
+        </form>
+
+        <aside class="result-panel">
+            <span class="result-label">Status</span>
+            <div class="result" id="supportStatus">Noch nicht freigeschaltet.</div>
+            <div class="result-meta" id="supportMeta">F&uuml;lle das Formular aus, um Premium lokal zu speichern.</div>
+        </aside>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-head">
+            <div>
+                <p class="section-label">Fetch Liste mit Filter</p>
+                <h2>Supporter-Level</h2>
+            </div>
+            <div class="filter-controls">
+                <label for="levelSearch">Level suchen</label>
+                <input type="search" id="levelSearch" placeholder="z.B. Klima">
+            </div>
+        </div>
+        <div class="tips-grid" id="supportLevels" aria-live="polite"></div>
+    </section>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
